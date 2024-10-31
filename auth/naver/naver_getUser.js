@@ -1,4 +1,4 @@
-async function getUserInfo(accessToken) {
+export default async function getUserInfo(accessToken) {
     const response = await fetch("https://openapi.naver.com/v1/nid/me", {
         method: "GET",
         headers: {
