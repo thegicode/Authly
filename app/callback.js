@@ -1,3 +1,6 @@
+import getAccessToken from "../auth/naver/naver_accesToken.js";
+import getUserInfo from "../auth/naver/naver_getUser.js";
+
 // URL에서 code와 state를 추출하는 함수
 function getCodeAndStateFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
