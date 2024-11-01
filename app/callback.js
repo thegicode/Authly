@@ -28,8 +28,8 @@
 // });
 
 var naverLogin = new naver.LoginWithNaverId({
-    clientId: window.env.NAVER_CLIENT_ID,
-    callbackUrl: window.env.NAVER_REDIRECT_URI,
+    clientId: localStorage.getItem("NAVER_CLIENT_ID"), // 로컬 스토리지에서 Client ID 불러오기
+    callbackUrl: localStorage.getItem("NAVER_REDIRECT_URI"),
 });
 
 naverLogin.init();

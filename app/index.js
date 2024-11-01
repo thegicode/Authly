@@ -6,8 +6,8 @@
 // });
 
 var naverLogin = new naver.LoginWithNaverId({
-    clientId: window.env.NAVER_CLIENT_ID, // 네이버 개발자 센터에서 발급받은 Client ID
-    callbackUrl: window.env.NAVER_REDIRECT_URI, // 설정한 Redirect URI와 동일하게 설정
+    clientId: localStorage.getItem("NAVER_CLIENT_ID"), // 로컬 스토리지에서 Client ID 불러오기
+    callbackUrl: localStorage.getItem("NAVER_REDIRECT_URI"),
     isPopup: false, // 팝업 형태로 로그인을 사용할지 여부
     loginButton: { color: "green", type: 3, height: 45 }, // 로그인 버튼 스타일 지정
 });
