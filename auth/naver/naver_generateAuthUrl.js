@@ -29,5 +29,5 @@ export default function generateNaverAuthUrl() {
     // URLSearchParams로 파라미터를 문자열로 변환하고, 네이버 인증 URL에 추가
     const url = `${naverAuthUrl}?${new URLSearchParams(params)}`;
     console.log(url);
-    // window.location.href = url;
+    window.location.href = url;
 }
