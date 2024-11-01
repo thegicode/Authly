@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 5. 사용자 정보 요청
     const userInfo = await getUserInfo(accessToken);
+    console.log("userInfo", userInfo);
 
     // 6. 사용자 정보로 회원 가입/로그인 처리
     // 네이버에서 가져온 사용자 정보를 바탕으로 세션을 생성하고, 기존 회원이 아니라면 회원 가입 절차를 진행합니다.
