@@ -1,7 +1,7 @@
 export default async function getAccessToken(code, state) {
-    const naver_client_id = process.env.NAVER_CLIENT_ID;
-    const naver_client_secret = process.env.NAVER_CLIENT_SECRET;
-    const redirect_uri = process.env.NAVER_REDIRECT_URI;
+    const naver_client_id = localStorage.getItem("NAVER_CLIENT_ID");
+    const naver_client_secret = localStorage.getItem("NAVER_CLIENT_SECRET");
+    const redirect_uri = localStorage.getItem("NAVER_REDIRECT_URI");
 
     try {
         const tokenUrl = `https://nid.naver.com/oauth2.0/token`;
