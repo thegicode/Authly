@@ -5,8 +5,8 @@ export default function generateNaverAuthUrl() {
     // const naver_client_id = process.env.NAVER_CLIENT_ID;
     // const redirect_uri = process.env.NAVER_REDIRECT_URI;
 
-    const naver_client_id = window.env.NAVER_CLIENT_ID;
-    const redirect_uri = window.env.NAVER_REDIRECT_URI;
+    const naver_client_id = localStorage.getItem("NAVER_CLIENT_ID");
+    const redirect_uri = localStorage.getItem("NAVER_REDIRECT_URI");
 
     // CSRF 방지를 위한 고유한 state 문자열을 생성합니다
     const generateRandomState = () => {
