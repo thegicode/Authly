@@ -15,8 +15,16 @@ export default async function getAccessToken(code, state) {
         };
 
         // Access Token 요청
-        const response = await axios.get(tokenUrl, { params });
-        const { accessToken } = response.data;
+        const response = await fetch(`${tokenUrl}?${params.toString()}`, {
+            method: "GET",
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const accessToken = data.accessToken;
 
         console.log("Access Token:", accessToken);
         return accessToken;
