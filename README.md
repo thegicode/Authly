@@ -2,8 +2,6 @@
 
 ## 실행
 
-cd Users/deokim/Documents/코딩/project-my/authly
-
 ## naver
 
 -   [네이버 개발자 센터 / 애플리케이션 등록](https://developers.naver.com/apps/#/register)

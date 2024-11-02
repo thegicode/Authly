@@ -1,5 +1,5 @@
-import getAccessToken from "../auth/naver/naver_accesToken.js";
-import getUserInfo from "../auth/naver/naver_getUser.js";
+import getAccessToken from "../../scripts/auth/naver/naver_accesToken.js";
+import getUserInfo from "../../scripts/auth/naver/naver_getUser.js";
 
 // URL에서 code와 state를 추출하는 함수
 function getCodeAndStateFromUrl() {
