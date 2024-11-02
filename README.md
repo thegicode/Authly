@@ -3,15 +3,21 @@
 ## 터미널
 
 cd /Users/deokim/Documents/코딩/project-my/authly
+npm start
 
 <br>
 
-## 로그인하기
+## 로그인하기 실행
 
 ### 네이버
 
 1. 어플리케이션 등록
    [네이버 개발자 센터 / 애플리케이션 등록](https://developers.naver.com/apps/#/register)
+   pc웹
+
+    - 서비스 URL : http://localhost:3000/naver
+    - 네이버 로그인 Callback URL : http://localhost:3000/html/naver-callback.html
+
 2. 로컬스토리지 설정
 
     ```
@@ -19,6 +25,8 @@ cd /Users/deokim/Documents/코딩/project-my/authly
     # window.localStorage.setItem('NAVER_CLIENT_SECRET', "")
     # window.localStorage.setItem('NAVER_REDIRECT_URI', "")
     ```
+
+3. http://localhost:3000/naver
 
 <br>
 
