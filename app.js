@@ -1,7 +1,7 @@
 // app.js
 const express = require("express");
 const path = require("path");
-const naverAuthRouter = require("./routes/naverAuth");
+const naverAuthRouter = require("./routes/naverAuthRoutes");
 const app = express();
 const PORT = 3000;
 

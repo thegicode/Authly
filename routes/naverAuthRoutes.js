@@ -4,7 +4,7 @@ const router = express.Router();
 const {
     getNaverAccessToken,
     getNaverUserInfo,
-} = require("../services/naverAuth.js");
+} = require("../services/naverAuthService");
 
 router.post("/getNaverAccessToken", async (req, res) => {
     const { code, state, client_id, client_secret, redirect_uri } = req.body;
