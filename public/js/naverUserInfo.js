@@ -1,6 +1,6 @@
 export async function requestNaverUserInfo(accessToken) {
     try {
-        const response = await fetch("/auth/getNaverUserInfo", {
+        const response = await fetch("/naverAuth/getNaverUserInfo", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

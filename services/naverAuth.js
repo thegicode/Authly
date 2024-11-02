@@ -43,7 +43,7 @@ async function getNaverUserInfo(accessToken) {
         });
         return await response.json();
         // email :
-        // id : access token
+        // id :
         // nickname:
     } catch (error) {
         console.error("Error fetching access user info:", error);
