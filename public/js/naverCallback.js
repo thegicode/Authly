@@ -20,6 +20,7 @@ if (accessToken) {
 
     const userInfo = await requestNaverUserInfo(accessToken);
     console.log("User Info:", userInfo);
+    document.body.innerHTML = `<p><strong>${userInfo.nickname}</strong>님</p><p>로그인에 성공했습니다.</p><p>${userInfo.email}</p>`;
 }
 
 // var naverLogin = new naver.LoginWithNaverId({
