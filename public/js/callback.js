@@ -1,5 +1,5 @@
-import getAccessToken from "../../scripts/auth/naver/naver_accesToken.js";
-import getUserInfo from "../../scripts/auth/naver/naver_getUser.js";
+import { requestNaverAccessToken } from "./naverAuthAccessToken.js";
+import { requestNaverUserInfo } from "./naverUserInfo.js";
 
 // URL에서 code와 state를 추출하는 함수
 function getCodeAndStateFromUrl() {
@@ -10,23 +10,17 @@ function getCodeAndStateFromUrl() {
     };
 }
 
-// document.addEventListener("DOMContentLoaded", async () => {
-// 3. 네이버에서 인증 코드 받기
+// 실행 로직: 인증 코드 -> Access Token -> 사용자 정보
 const { code, state } = getCodeAndStateFromUrl();
-console.log("Code:", code);
-console.log("State:", state);
+console.log("Code:", code, "State:", state);
 
-// 4. 인증 코드로 Access Token 발급
-const accessToken = await getAccessToken(code, state);
-console.log("accessToken", accessToken);
+const accessToken = await requestNaverAccessToken(code, state);
+if (accessToken) {
+    console.log("Access Token:", accessToken);
 
-// 5. 사용자 정보 요청
-const userInfo = await getUserInfo(accessToken);
-console.log("userInfo", userInfo);
-
-// 6. 사용자 정보로 회원 가입/로그인 처리
-// 네이버에서 가져온 사용자 정보를 바탕으로 세션을 생성하고, 기존 회원이 아니라면 회원 가입 절차를 진행합니다.
-// });
+    const userInfo = await requestNaverUserInfo(accessToken);
+    console.log("User Info:", userInfo);
+}
 
 // var naverLogin = new naver.LoginWithNaverId({
 //     clientId: localStorage.getItem("NAVER_CLIENT_ID"), // 로컬 스토리지에서 Client ID 불러오기

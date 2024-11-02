@@ -1,10 +1,5 @@
-// require("dotenv").config();
-
-export default function generateNaverAuthUrl() {
+export function generateNaverAuthUrl() {
     // 환경 변수에서 네이버 클라이언트 ID, 리디렉션 URI를 가져옵니다
-    // const naver_client_id = process.env.NAVER_CLIENT_ID;
-    // const redirect_uri = process.env.NAVER_REDIRECT_URI;
-
     const naver_client_id = localStorage.getItem("NAVER_CLIENT_ID");
     const redirect_uri = localStorage.getItem("NAVER_REDIRECT_URI");
 
@@ -28,6 +23,5 @@ export default function generateNaverAuthUrl() {
 
     // URLSearchParams로 파라미터를 문자열로 변환하고, 네이버 인증 URL에 추가
     const url = `${naverAuthUrl}?${new URLSearchParams(params)}`;
-    console.log(url);
     window.location.href = url;
 }

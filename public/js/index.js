@@ -1,4 +1,4 @@
-import generateNaverAuthUrl from "../../scripts/auth/naver/naver_generateAuthUrl.js";
+import { generateNaverAuthUrl } from "./naverAuthUrl.js";
 
 document.querySelector("#naver-login_button").addEventListener("click", () => {
     //  2. 네이버 로그인 요청 URL 구성
