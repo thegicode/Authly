@@ -1,24 +1,10 @@
-import { requestNaverAccessToken } from "./naverAuthAccessToken.js";
-import { requestNaverUserInfo } from "./naverUserInfo.js";
+import { getCodeAndStateFromUrl, fetchNaverUserInfo } from "./naverAuth.js";
 
-// URL에서 code와 state를 추출하는 함수
-function getCodeAndStateFromUrl() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return {
-        code: urlParams.get("code"),
-        state: urlParams.get("state"),
-    };
-}
-
-// 실행 로직: 인증 코드 -> Access Token -> 사용자 정보
 const { code, state } = getCodeAndStateFromUrl();
 console.log("Code:", code, "State:", state);
 
-const accessToken = await requestNaverAccessToken(code, state);
-if (accessToken) {
-    console.log("Access Token:", accessToken);
-
-    const userInfo = await requestNaverUserInfo(accessToken);
+const userInfo = await fetchNaverUserInfo(code, state);
+if (userInfo) {
     console.log("User Info:", userInfo);
     document.body.innerHTML = `<p><strong>${userInfo.nickname}</strong>님</p><p>로그인에 성공했습니다.</p><p>${userInfo.email}</p>`;
 }

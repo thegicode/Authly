@@ -45,16 +45,12 @@ npm start
 project-root/
 ├── app.js # Express 서버 엔트리 파일
 ├── public/ # HTML 파일과 정적 파일을 포함하는 폴더
-│ ├── naer-index.html
-│ ├── naver-callback.html
+│ ├── html/
 │ └── js/ # JavaScript 파일을 포함하는 폴더
-│       └── naverIndex.js                       # HTML 파일용 JavaScript 파일
-│       └── naverCallback.js                    # HTML 파일용 JavaScript 파일
-│       ├── naverAuthAccessToken.js             # 네이버 인증 토큰 관련 함수 파일
-│       ├── naverAuthUrl.js                     # 네이버 인증 url 관련 함수 파일
-│       └── naverUserInfo.js                    # 네이버 사용자 정보 관련 함수 파일
 ├── routes/
 │ └── naverAuthRoutes.js # 네이버 토큰 요청 라우트 파일
 └── services/
 │ └── naverAuthService.js # 네이버 API 요청 로직 파일
+├── .env                          # 환경 변수 설정 파일
+└── package.json
 ```

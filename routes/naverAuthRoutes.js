@@ -4,8 +4,8 @@ const crypto = require("crypto"); // state 값 생성용
 const router = express.Router();
 
 const {
-    fetchNaverAccessToken,
-    fetchNaverUserInfo,
+    getNaverAccessToken,
+    getNaverUserInfo,
 } = require("../services/naverAuthService");
 
 router.get("/getNaverAuthUrl", (req, res) => {
@@ -27,7 +27,7 @@ router.get("/getNaverAuthUrl", (req, res) => {
     res.json({ url: `${naverAuthUrl}?${params.toString()}` });
 });
 
-router.post("/getNaverAccessToken", async (req, res) => {
+router.post("/getUserInfo", async (req, res) => {
     const { code, state } = req.body;
 
     const client_id = process.env.NAVER_CLIENT_ID;
@@ -43,27 +43,19 @@ router.post("/getNaverAccessToken", async (req, res) => {
     delete req.session.state;
 
     try {
-        const data = await fetchNaverAccessToken(
+        const accessTokenData = await getNaverAccessToken(
             code,
             state,
             client_id,
             client_secret,
             redirect_uri
         );
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: "Failed to fetch access token" });
-    }
-});
 
-router.post("/getNaverUserInfo", async (req, res) => {
-    const { accessToken } = req.body;
-
-    try {
-        const data = await fetchNaverUserInfo(accessToken);
-        res.json(data);
+        const userInfo = await getNaverUserInfo(accessTokenData.access_token);
+        res.json(userInfo.response);
+        //  id, nickname, email
     } catch (error) {
-        res.status(500).json({ error: "Failed to fetch access token" });
+        console.error("Error fetching user info:", error);
     }
 });
 
