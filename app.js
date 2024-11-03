@@ -10,10 +10,10 @@ const PORT = 3000;
 // 세션 설정
 app.use(
     session({
-        secret: "authly", // 비밀 키 (변경 필요)
+        secret: process.env.SESSION_SECRET || "default_secret",
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false }, // HTTPS 환경에서는 true로 설정
+        cookie: { secure: process.env.NODE_ENV === "production" }, // 배포 환경에서는 true 설정
     })
 );
 

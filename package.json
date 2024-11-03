@@ -4,7 +4,8 @@
     "description": "## naver",
     "main": "index.js",
     "scripts": {
-        "start": "node app",
+        "start": "NODE_ENV=development node app",
+        "build": "NODE_ENV=production node app",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",

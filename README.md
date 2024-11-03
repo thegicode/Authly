@@ -7,6 +7,14 @@ npm start
 
 <br>
 
+## 설정
+
+1. .env
+   SESSION_SECRET=""
+   NODE_ENV="development"
+
+<br>
+
 ## 로그인하기 실행
 
 ### 네이버
