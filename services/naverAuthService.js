@@ -1,4 +1,4 @@
-async function getNaverAccessToken(
+async function fetchNaverAccessToken(
     code,
     state,
     client_id,
@@ -32,7 +32,7 @@ async function getNaverAccessToken(
     }
 }
 
-async function getNaverUserInfo(accessToken) {
+async function fetchNaverUserInfo(accessToken) {
     try {
         const response = await fetch("https://openapi.naver.com/v1/nid/me", {
             method: "GET",
@@ -50,4 +50,4 @@ async function getNaverUserInfo(accessToken) {
     }
 }
 
-module.exports = { getNaverAccessToken, getNaverUserInfo };
+module.exports = { fetchNaverAccessToken, fetchNaverUserInfo };

@@ -4,12 +4,13 @@ const crypto = require("crypto"); // state 값 생성용
 const router = express.Router();
 
 const {
-    getNaverAccessToken,
-    getNaverUserInfo,
+    fetchNaverAccessToken,
+    fetchNaverUserInfo,
 } = require("../services/naverAuthService");
 
 router.get("/getNaverAuthUrl", (req, res) => {
-    const { naver_client_id, redirect_uri } = req.query;
+    const naver_client_id = process.env.NAVER_CLIENT_ID;
+    const redirect_uri = process.env.NAVER_REDIRECT_URI;
 
     // state 값 생성
     const state = crypto.randomBytes(20).toString("hex");
@@ -27,7 +28,11 @@ router.get("/getNaverAuthUrl", (req, res) => {
 });
 
 router.post("/getNaverAccessToken", async (req, res) => {
-    const { code, state, client_id, client_secret, redirect_uri } = req.body;
+    const { code, state } = req.body;
+
+    const client_id = process.env.NAVER_CLIENT_ID;
+    const client_secret = process.env.NAVER_CLIENT_SECRET;
+    const redirect_uri = process.env.NAVER_REDIRECT_URI;
 
     // 1. 세션에서 저장한 state 값과 콜백으로 받은 state 값을 비교
     if (state !== req.session.state) {
@@ -38,7 +43,7 @@ router.post("/getNaverAccessToken", async (req, res) => {
     delete req.session.state;
 
     try {
-        const data = await getNaverAccessToken(
+        const data = await fetchNaverAccessToken(
             code,
             state,
             client_id,
@@ -55,7 +60,7 @@ router.post("/getNaverUserInfo", async (req, res) => {
     const { accessToken } = req.body;
 
     try {
-        const data = await getNaverUserInfo(accessToken);
+        const data = await fetchNaverUserInfo(accessToken);
         res.json(data);
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch access token" });
