@@ -1,9 +1,20 @@
 // app.js
 const express = require("express");
 const path = require("path");
+const session = require("express-session");
 const naverAuthRouter = require("./routes/naverAuthRoutes");
 const app = express();
 const PORT = 3000;
+
+// 세션 설정
+app.use(
+    session({
+        secret: "authly", // 비밀 키 (변경 필요)
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false }, // HTTPS 환경에서는 true로 설정
+    })
+);
 
 app.use(express.json());
 app.use("/naverAuth", naverAuthRouter);

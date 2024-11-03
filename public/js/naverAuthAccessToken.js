@@ -2,9 +2,8 @@ export async function requestNaverAccessToken(code, state) {
     const client_id = localStorage.getItem("NAVER_CLIENT_ID");
     const client_secret = localStorage.getItem("NAVER_CLIENT_SECRET");
     const redirect_uri = localStorage.getItem("NAVER_REDIRECT_URI");
-
     try {
-        const response = await fetch("/naverAuth/getNaverAccessToken", {
+        const response = await fetch(`/naverAuth/getNaverAccessToken`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

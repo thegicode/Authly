@@ -1,5 +1,3 @@
-// services/naverAuth.js
-
 async function getNaverAccessToken(
     code,
     state,
@@ -20,6 +18,7 @@ async function getNaverAccessToken(
     try {
         const response = await fetch(`${tokenUrl}?${params.toString()}`, {
             method: "GET",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
         });
 
         if (!response.ok) {

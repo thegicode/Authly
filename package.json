@@ -10,7 +10,11 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "crypto": "^1.0.1",
         "dotenv": "^16.4.5",
         "express": "^4.21.1"
+    },
+    "dependencies": {
+        "express-session": "^1.18.1"
     }
 }
