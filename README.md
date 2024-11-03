@@ -23,7 +23,7 @@ npm start
     [네이버 개발자 센터 / 애플리케이션 등록](https://developers.naver.com/apps/#/register)
     pc웹
 
-    -   서비스 URL : http://localhost:3000/naver
+    -   서비스 URL : http://localhost:3000/login
     -   네이버 로그인 Callback URL : http://localhost:3000/html/naver-callback.html
 
 2.  .env 설정

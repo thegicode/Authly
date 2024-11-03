@@ -1,6 +1,5 @@
-// routes/auth.js
 const express = require("express");
-const crypto = require("crypto"); // state 값 생성용
+const crypto = require("crypto");
 const router = express.Router();
 
 const {
@@ -8,39 +7,35 @@ const {
     getNaverUserInfo,
 } = require("../services/naverAuthService");
 
+// 환경 변수와 네이버 인증 URL 상수화
+const NAVER_AUTH_URL = "https://nid.naver.com/oauth2.0/authorize";
+const client_id = process.env.NAVER_CLIENT_ID;
+const client_secret = process.env.NAVER_CLIENT_SECRET;
+const redirect_uri = process.env.NAVER_REDIRECT_URI;
+
+// 네이버 인증 URL 생성
 router.get("/authUrl", (req, res) => {
-    const naver_client_id = process.env.NAVER_CLIENT_ID;
-    const redirect_uri = process.env.NAVER_REDIRECT_URI;
-
-    // state 값 생성
     const state = crypto.randomBytes(20).toString("hex");
-    req.session.state = state; // 세션에 state 값을 저장하여 검증에 사용
+    req.session.state = state; // 세션에 state 값 저장
 
-    const naverAuthUrl = "https://nid.naver.com/oauth2.0/authorize";
     const params = new URLSearchParams({
         response_type: "code",
-        client_id: naver_client_id,
-        redirect_uri: redirect_uri,
-        state: state,
+        client_id,
+        redirect_uri,
+        state,
     });
 
-    res.json({ url: `${naverAuthUrl}?${params.toString()}` });
+    res.json({ url: `${NAVER_AUTH_URL}?${params.toString()}` });
 });
 
+// 네이버 사용자 정보 요청
 router.post("/userInfo", async (req, res) => {
     const { code, state } = req.body;
 
-    const client_id = process.env.NAVER_CLIENT_ID;
-    const client_secret = process.env.NAVER_CLIENT_SECRET;
-    const redirect_uri = process.env.NAVER_REDIRECT_URI;
-
-    // 1. 세션에서 저장한 state 값과 콜백으로 받은 state 값을 비교
     if (state !== req.session.state) {
-        return res.status(400).send("Invalid state parameter.");
+        return res.status(400).json({ error: "Invalid state parameter" });
     }
-
-    // 2. state 검증이 성공한 경우 세션에서 state 삭제
-    delete req.session.state;
+    delete req.session.state; // 사용된 state 값 삭제
 
     try {
         const accessTokenData = await getNaverAccessToken(
@@ -52,10 +47,10 @@ router.post("/userInfo", async (req, res) => {
         );
 
         const userInfo = await getNaverUserInfo(accessTokenData.access_token);
-        res.json(userInfo.response);
-        //  id, nickname, email
+        res.json(userInfo); // id, nickname, email
     } catch (error) {
         console.error("Error fetching user info:", error);
+        res.status(500).json({ error: "Failed to fetch user info" });
     }
 });
 

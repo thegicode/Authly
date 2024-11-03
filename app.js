@@ -23,9 +23,9 @@ app.use("/naverAuth", naverAuthRouter);
 // public 폴더를 정적 파일 경로로 설정
 app.use(express.static(path.join(__dirname, "public")));
 
-// 특정 라우터 설정하여 /naver-index로 접근 시 HTML 파일 제공
-app.get("/naver", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/html/naver-index.html"));
+// 라우터 설정, HTML 파일 제공
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/html/login.html"));
 });
 
 app.listen(PORT, () => {
