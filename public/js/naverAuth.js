@@ -1,6 +1,6 @@
 export async function fetchNaverAuthUrl() {
     try {
-        const response = await fetch(`/naverAuth/getNaverAuthUrl`, {
+        const response = await fetch(`/naverAuth/authUrl`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export function getCodeAndStateFromUrl() {
 
 export async function fetchNaverUserInfo(code, state) {
     try {
-        const response = await fetch(`/naverAuth/getUserInfo`, {
+        const response = await fetch(`/naverAuth/userInfo`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

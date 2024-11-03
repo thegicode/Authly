@@ -8,7 +8,7 @@ const {
     getNaverUserInfo,
 } = require("../services/naverAuthService");
 
-router.get("/getNaverAuthUrl", (req, res) => {
+router.get("/authUrl", (req, res) => {
     const naver_client_id = process.env.NAVER_CLIENT_ID;
     const redirect_uri = process.env.NAVER_REDIRECT_URI;
 
@@ -27,7 +27,7 @@ router.get("/getNaverAuthUrl", (req, res) => {
     res.json({ url: `${naverAuthUrl}?${params.toString()}` });
 });
 
-router.post("/getUserInfo", async (req, res) => {
+router.post("/userInfo", async (req, res) => {
     const { code, state } = req.body;
 
     const client_id = process.env.NAVER_CLIENT_ID;
