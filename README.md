@@ -1,4 +1,4 @@
-# authly
+# Authly
 
 ## 터미널
 
@@ -7,15 +7,25 @@ npm start
 
 <br>
 
-## 설정
-
-1. .env
-   SESSION_SECRET=""
-   NODE_ENV="development"
+---
 
 <br>
 
-## 로그인하기 실행
+## 설정
+
+1. .env
+    ```
+    SESSION_SECRET=""
+    NODE_ENV="development"
+    ```
+
+<br>
+
+---
+
+<br>
+
+## 로그인
 
 ### 네이버
 
@@ -36,6 +46,10 @@ npm start
     ```
 
 3.  http://localhost:3000/naver
+
+<br>
+
+---
 
 <br>
 
@@ -63,3 +77,9 @@ project-root/
 └── package.json                     # 프로젝트 메타 정보와 종속성 관리 파일
 
 ```
+
+<br>
+
+---
+
+<br>

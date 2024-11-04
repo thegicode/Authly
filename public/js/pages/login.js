@@ -1,9 +1,14 @@
 import { fetchNaverAuthUrl } from "../modules/naverAuthClient.js";
 
-document.querySelector("#naver-login_button").addEventListener("click", () => {
-    //  2. 네이버 로그인 요청 URL 구성
-    fetchNaverAuthUrl();
-});
+addEvents();
+
+function addEvents() {
+    document
+        .querySelector("#naver_login_button")
+        .addEventListener("click", () => {
+            fetchNaverAuthUrl();
+        });
+}
 
 // var naverLogin = new naver.LoginWithNaverId({
 //     clientId: localStorage.getItem("NAVER_CLIENT_ID"), // 로컬 스토리지에서 Client ID 불러오기

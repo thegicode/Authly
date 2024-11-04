@@ -1,30 +1,48 @@
 import {
     getCodeAndStateFromUrl,
     fetchNaverUserInfo,
+    fetchNaverLogOut,
 } from "../modules/naverAuthClient.js";
 
-// URL에서 code와 state 값 추출
-const { code, state } = getCodeAndStateFromUrl();
-console.log("Code:", code, "State:", state);
+const messageElement = document.querySelector(".message");
+const logOutButton = document.querySelector("#naver_logout_button");
 
-if (!code || !state) {
-    // code나 state가 없으면 로그인 실패 메시지를 표시하거나 리디렉션 처리
-    console.error("Naver login failed: missing code or state.");
-    document.body.innerHTML = `<p>로그인에 실패했습니다. 다시 시도해주세요.</p>`;
-} else {
-    try {
-        // 사용자 정보 가져오기
-        const userInfo = await fetchNaverUserInfo(code, state);
-        if (userInfo) {
-            console.log("User Info:", userInfo);
-            document.body.innerHTML = `<p><strong>${userInfo.nickname}</strong>님</p><p>로그인에 성공했습니다.</p><p>${userInfo.email}</p>`;
-        } else {
-            document.body.innerHTML = `<p>로그인에 실패했습니다. 다시 시도해주세요.</p>`;
+runCallback();
+addEvents();
+
+async function runCallback() {
+    // URL에서 code와 state 값 추출
+    const { code, state } = getCodeAndStateFromUrl();
+    console.log("Code:", code, "State:", state);
+
+    if (!code || !state) {
+        // code나 state가 없으면 로그인 실패 메시지를 표시하거나 리디렉션 처리
+        console.error("Naver login failed: missing code or state.");
+        messageElement.innerHTML = `<p>로그인에 실패했습니다. 다시 시도해주세요.</p>`;
+    } else {
+        try {
+            // 사용자 정보 가져오기
+            const userInfo = await fetchNaverUserInfo(code, state);
+            if (userInfo) {
+                console.log("User Info:", userInfo);
+                messageElement.innerHTML = `<p><strong>${userInfo.nickname}</strong>님</p><p>로그인에 성공했습니다.</p><p>${userInfo.email}</p>`;
+            } else {
+                messageElement.innerHTML = `<p>로그인에 실패했습니다. 다시 시도해주세요.</p>`;
+            }
+        } catch (error) {
+            console.error("Error fetching user info:", error);
+            messageElement.innerHTML = `<p>로그인 처리 중 오류가 발생했습니다. 다시 시도해주세요.</p>`;
         }
-    } catch (error) {
-        console.error("Error fetching user info:", error);
-        document.body.innerHTML = `<p>로그인 처리 중 오류가 발생했습니다. 다시 시도해주세요.</p>`;
     }
+}
+
+function addEvents() {
+    logOutButton.addEventListener("click", async () => {
+        const message = await fetchNaverLogOut();
+        messageElement.innerHTML = `<p>${message}</p>`;
+
+        logOutButton.remove();
+    });
 }
 
 // var naverLogin = new naver.LoginWithNaverId({

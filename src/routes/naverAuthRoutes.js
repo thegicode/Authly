@@ -54,4 +54,15 @@ router.post("/userInfo", async (req, res) => {
     }
 });
 
+// 로그아웃
+router.get("/logout", (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ message: "Failed to log out." });
+        }
+        res.clearCookie("connect.sid"); // 세션 쿠키 삭제
+        res.json({ message: "Logged out successfully" });
+    });
+});
+
 module.exports = router;
