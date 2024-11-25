@@ -2,7 +2,6 @@
 
 ## 터미널
 
-cd /Users/deokim/Documents/코딩/project-my/authly
 npm start
 
 <br>
@@ -25,7 +24,17 @@ npm start
 
 <br>
 
-## 로그인
+## url
+
+http://localhost:3000/login
+
+<br>
+
+---
+
+<br>
+
+## 로그인 개발 가이드
 
 ### 네이버
 
@@ -45,7 +54,9 @@ npm start
 
     ```
 
-3.  http://localhost:3000/naver
+### 카카오
+
+1. [가이드 문서](https://developers.kakao.com/docs/latest/ko/kakaologin/common)
 
 <br>
 
